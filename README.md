@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+### Mapeando a noite sorocabana.
 
-First, run the development server:
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### `> L A B _ N O T E S . T X T`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> Este repositório não é o projeto final. É a protótipo.
+>
+> uma bancada de testes, um laboratório para dissecar, entender e dominar a **Google Places API**..
+>
+> O objetivo era simples: provar que a visão era tecnicamente viável. Validar o fluxo de dados, entender os custos, testar os limites do plano gratuito.
+>
+> Considere isso o **Marco Zero**. A primeira anomalia no sistema.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+### `⚡ A R S E N A L _ T E C N O L Ó G I C O ⚡`
 
-To learn more about Next.js, take a look at the following resources:
+* 🚀 **NEXT.JS 14+ // REACT**
+    * *A carcaça do foguete. A estrutura para construir o futuro, de forma rápida e escalável.*
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* 🗺️ **GOOGLE PLACES API**
+    * *O oráculo. A fonte de dados brutos que alimenta a nossa inteligência.*
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* 🎨 **TAILWIND CSS**
+    * *Estilo no modo ultra-instinto. Design rápido, direto e sem firulas.*
 
-## Deploy on Vercel
+* 🔒 **TYPESCRIPT**
+    * *O colete à prova de balas. Garante que o código não sangre por erros bobos.*
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* ☁️ **VERCEL**
+    * *A plataforma de lançamento. Onde o código se torna real e acessível para o mundo.*
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+### ` пульс // S T A T U S `
+
+* **FASE ATUAL:** Prova de Conceito [██████████] 100%
+* **DIRETRIZ PRIMÁRIA:** Conexão, busca e exibição de dados da API. `[ SUCESSO ]`
+* **DIRETRIZ SECUNDÁRIA:** Implementação de práticas de segurança e deploy. `[ SUCESSO ]`
+* **PRÓXIMA TRANSMISSÃO:** Evolução para um produto interativo.
+
+---
+<div align="center">
+<pre>
+// A REVOLUÇÃO NÃO SERÁ TELEVISIONADA.
+// ELA SERÁ MAPEADA.
+</pre>
+</div>
