@@ -18,21 +18,14 @@
 ### `⚡ T E C H _ S T A C K ⚡`
 
 * 🚀 **NEXT.JS 14+ // REACT**
-    * *A carcaça do foguete. A estrutura para construir o futuro, de forma rápida e escalável.*
 
 * 🗺️ **GOOGLE PLACES API**
-    * *O oráculo. A fonte de dados brutos que alimenta a nossa inteligência.*
 
 * 🎨 **TAILWIND CSS**
-    * *Estilo no modo ultra-instinto. Design rápido, direto e sem firulas.*
 
 * 🔒 **TYPESCRIPT**
-    * *O colete à prova de balas. Garante que o código não sangre por erros bobos.*
 
 * ☁️ **VERCEL**
-    * *A plataforma de lançamento. Onde o código se torna real e acessível para o mundo.*
-
----
 
 ---
 
