@@ -18,7 +18,7 @@ export default function PlaceCard({ place }: PlaceCardProps) {
   const photoName = place.photos?.[0]?.name;
 
   return (
-    <div className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-cyan-500/50">
+    <div className="cursor-pointer bg-gray-800 border border-gray-700 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-cyan-500/50">
       <div className="relative w-full h-40">
         {photoName ? (
           <Image
