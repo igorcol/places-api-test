@@ -8,17 +8,14 @@
 
 ### `> L A B _ N O T E S . T X T`
 
-> Este repositório não é o projeto final. É a protótipo.
+> Este projeto foi feito para praticar e aprender sobre a PLACES API do google
 >
-> uma bancada de testes, um laboratório para dissecar, entender e dominar a **Google Places API**..
+> A mesma api será utilizada em um outro projeto pessoal.
 >
-> O objetivo era simples: provar que a visão era tecnicamente viável. Validar o fluxo de dados, entender os custos, testar os limites do plano gratuito.
->
-> Considere isso o **Marco Zero**. A primeira anomalia no sistema.
 
 ---
 
-### `⚡ A R S E N A L _ T E C N O L Ó G I C O ⚡`
+### `⚡ T E C H _ S T A C K ⚡`
 
 * 🚀 **NEXT.JS 14+ // REACT**
     * *A carcaça do foguete. A estrutura para construir o futuro, de forma rápida e escalável.*
@@ -37,17 +34,16 @@
 
 ---
 
-### ` пульс // S T A T U S `
+---
 
-* **FASE ATUAL:** Prova de Conceito [██████████] 100%
-* **DIRETRIZ PRIMÁRIA:** Conexão, busca e exibição de dados da API. `[ SUCESSO ]`
-* **DIRETRIZ SECUNDÁRIA:** Implementação de práticas de segurança e deploy. `[ SUCESSO ]`
-* **PRÓXIMA TRANSMISSÃO:** Evolução para um produto interativo.
+### `V1  Evolução -> V2`
+
+#### `V1: (Client-Side)`
+O cliente (navegador) trabalhava sozinho. A partir do `useEffect`, disparava uma única `textQuery` genérica (`'bares e baladas em Sorocaba'`) direto para a API do Google. Era funcional, mas amador. **Resultado:** Lento para o usuário, lógica de busca exposta e sem inteligência de curadoria.
+
+#### `V2: (Server-Side)`
+O cliente agora delega. Ele faz **UMA** chamada para nossa própria API (`/api/places`). Nosso servidor, organiza **MÚLTIPLAS** chamadas em paralelo ao Google, buscando por tipos específicos (`'baladas'`, `'bares'`, `'shows'`). Os resultados são agregados, duplicatas removidas, e a lista final é mantida em um **cache** de memória para velocidade absurda. **Resultado:** Resposta quase instantânea, segurança máxima com a chave de API 100% secreta e controle total sobre os dados entregues.
+
+    O primeiro usuário realiza a chamada para a API, que salva os dados retornados em cache durante X tempo. Outros usuários que acessarem neste intervalo de tempo, não realizarão novas chamadas na API.
 
 ---
-<div align="center">
-<pre>
-// A REVOLUÇÃO NÃO SERÁ TELEVISIONADA.
-// ELA SERÁ MAPEADA.
-</pre>
-</div>
