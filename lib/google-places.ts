@@ -2,6 +2,10 @@
 const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 const PLACES_API_URL = 'https://places.googleapis.com/v1/places:searchText';
 
+// !!!! >> NÃO USAR << !!!! \\
+// !!!! >> NÃO USAR << !!!! \\
+// !!!! >> NÃO USAR << !!!! \\
+// ! FUNÇÃO ANTIGA PARA A V1 
 /**
  * Busca lugares de um tipo específico em sorocaba
  */
