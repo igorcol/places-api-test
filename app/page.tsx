@@ -5,11 +5,7 @@ import PlaceCard from "@/components/PlaceCard";
 import SkeletonCard from "@/components/SkeletonCard";
 import { Place } from "@/types/places";
 import { GeolocationState } from "@/types/GeolocationState";
-import {
-  FaSearch,
-  FaCocktail,
-  FaMusic,
-} from "react-icons/fa";
+import { FaSearch, FaCocktail, FaMusic, FaBug } from "react-icons/fa";
 import { GiCigar } from "react-icons/gi";
 
 export default function HomePage() {
@@ -19,6 +15,8 @@ export default function HomePage() {
   const [location, setLocation] = useState<GeolocationState>({
     status: "idle",
   });
+
+  const [isDebugMode, setIsDebugMode] = useState(false);
 
   // Busca a geoLocalização quando a pagina é carregada
   useEffect(() => {
@@ -117,7 +115,7 @@ export default function HomePage() {
             <p>{location.error}</p>
           </div>
           {places.map((place) => (
-            <PlaceCard key={place.id} place={place} />
+            <PlaceCard key={place.id} place={place} isDebugMode={isDebugMode} />
           ))}
         </>
       );
@@ -131,7 +129,9 @@ export default function HomePage() {
       );
     }
 
-    return places.map((place) => <PlaceCard key={place.id} place={place} />);
+    return places.map((place) => (
+      <PlaceCard key={place.id} place={place} isDebugMode={isDebugMode} />
+    ));
   };
 
   return (
@@ -189,6 +189,17 @@ export default function HomePage() {
                 </button>
               </div>
             </div>
+          </div>
+
+          {/* Botão de Debug */}
+          <div className="mt-4 flex justify-center">
+            <button
+              onClick={() => setIsDebugMode(!isDebugMode)}
+              className="px-4 py-2 text-xs font-semibold bg-gray-700 text-gray-300 rounded-full transition hover:bg-gray-600 flex items-center gap-2"
+            >
+              <FaBug className={isDebugMode ? "text-red-400" : ""} />
+              {isDebugMode ? "Desativar Modo Debug" : "Ativar Modo Debug"}
+            </button>
           </div>
         </header>
 

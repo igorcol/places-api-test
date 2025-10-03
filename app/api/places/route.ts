@@ -7,6 +7,9 @@ const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 const cache = new Map<string, { timestamp: number; data: Place[] }>();
 const CACHE_DURATION_MS = 30 * 60 * 1000;
 
+// Dados que serão trazidos pela api do google através do 'X-Goog-FieldMask'
+const PLACE_DATA_FIELDS = 'places.id,places.displayName,places.formattedAddress,places.rating,places.photos,places.types,places.primaryType';
+
 
 // * Busca por Proximidade
 async function searchNearby(coords: { lat: number; lon: number }, includedTypes: string[]): Promise<Place[]> {
@@ -15,7 +18,7 @@ async function searchNearby(coords: { lat: number; lon: number }, includedTypes:
 
     const response = await fetch(PLACES_API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Goog-Api-Key': API_KEY, 'X-Goog-FieldMask': 'places.id,places.displayName,places.formattedAddress,places.rating,places.photos' },
+        headers: { 'Content-Type': 'application/json', 'X-Goog-Api-Key': API_KEY, 'X-Goog-FieldMask': PLACE_DATA_FIELDS },
         body: JSON.stringify({
             includedTypes,
             maxResultCount: 10,
@@ -35,7 +38,7 @@ async function searchText(coords: { lat: number; lon: number }, textQuery: strin
 
     const response = await fetch(PLACES_API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Goog-Api-Key': API_KEY, 'X-Goog-FieldMask': 'places.id,places.displayName,places.formattedAddress,places.rating,places.photos' },
+        headers: { 'Content-Type': 'application/json', 'X-Goog-Api-Key': API_KEY, 'X-Goog-FieldMask': PLACE_DATA_FIELDS },
         body: JSON.stringify({
             textQuery,
             maxResultCount: 10,

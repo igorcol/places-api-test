@@ -12,4 +12,7 @@ export interface Place {
         name: string;
     }[];
     photoUrl?: string | null;
+    types?: string[]; // Tipo do local
+    primaryType?: string;
+    websiteUri?: string; // Pagina do local
 }
