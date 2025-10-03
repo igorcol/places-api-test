@@ -11,7 +11,19 @@ const CACHE_DURATION_MS = 30 * 60 * 1000;
 const PLACE_DATA_FIELDS = 'places.id,places.displayName,places.formattedAddress,places.rating,places.photos,places.types,places.primaryType';
 
 
-// * Busca por Proximidade
+// ----- REGRAS DE FILTRAGEM -----
+const RELEVANT_TYPES = new Set(['bar', 'night_club', 'pub']); // O lugar PRECISA te rum desses tipos para ser considerado
+const BLACKLISTED_PRIMARY_TYPES = new Set([ // Se algum lugar tiver esses como primary types está eliminado
+    'restaurant', 'brazilian_restaurant', 'japanese_restaurant', 'sushi_restaurant',
+    'fishing_pond', 'convenience_store', 'gas_station', 'skate_shop', 'meal_takeaway',
+    'tourist_attraction'
+]);
+const CONDITIONAL_BLACKLIST_TYPES = new Set(['store', 'tobacco_shop']); // Se primary type for 'store', será tratado como uma exceção
+
+
+// * --------- FUNÇÕES AUXILIARES ---------
+
+// -- Busca por Proximidade
 async function searchNearby(coords: { lat: number; lon: number }, includedTypes: string[]): Promise<Place[]> {
     const PLACES_API_URL = 'https://places.googleapis.com/v1/places:searchNearby';
     if (!API_KEY) throw new Error("API Key not configured.");
@@ -31,7 +43,8 @@ async function searchNearby(coords: { lat: number; lon: number }, includedTypes:
     return data.places || [];
 }
 
-// * Busca por Texto
+
+// -- Busca por Texto
 async function searchText(coords: { lat: number; lon: number }, textQuery: string): Promise<Place[]> {
     const PLACES_API_URL = 'https://places.googleapis.com/v1/places:searchText';
     if (!API_KEY) throw new Error("API Key not configured.");
@@ -95,9 +108,26 @@ export async function GET(request: NextRequest) {
             return { ...place, photoUrl };
         });
 
-        cache.set(cacheKey, { timestamp: Date.now(), data: uniquePlaces });
+        // -- FILTRAGEM HÍBRIDA --
+        const curatedPlaces = uniquePlaces.filter(place => {
+            // Sem primary type = relevant_type -> ELIMINADO.
+            const hasRelevantType = place.types?.some(type => RELEVANT_TYPES.has(type));
+            if (!hasRelevantType) return false
 
-        return NextResponse.json(uniquePlaces);
+            // Se possui uma tag da blacklist -> ELIMINADO.
+            if (place.primaryType && BLACKLISTED_PRIMARY_TYPES.has(place.primaryType)) {
+                return false
+            }
+
+            // Exceção para 'store'
+            if (place.primaryType && CONDITIONAL_BLACKLIST_TYPES.has(place.primaryType)) {}
+
+            return true;
+        })
+
+        cache.set(cacheKey, { timestamp: Date.now(), data: curatedPlaces });
+
+        return NextResponse.json(curatedPlaces);
     }
     catch (error) {
         console.error(`Erro geral no endpoint para a região ${cacheKey}:`, error);

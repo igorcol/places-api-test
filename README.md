@@ -40,13 +40,17 @@ O cliente agora delega. Ele faz **UMA** chamada para nossa própria API (`/api/p
 
     O primeiro usuário realiza a chamada para a API, que salva os dados retornados em cache durante X tempo. Outros usuários que acessarem neste intervalo de tempo, não realizarão novas chamadas na API.
 
-#### `V3: A CONSCIÊNCIA GEOGRÁFICA (Server-Side Dinâmico)`
+#### `V3: A CONSCIÊNCIA GEOGRÁFICA`
 
 O app deixa de ser sobre Sorocaba e passa a ser sobre **o usuário**. O cliente agora tem a missão de obter as coordenadas do usuário via `navigator.geolocation` e enviá-las para a nossa API. O servidor usa essa localização para realizar buscas geográficas precisas (`searchNearby`), e o **cache** evolui: deixa de ser um "post-it" único e se torna um "arquivo" com pastas para cada região do mapa. **Resultado:** Uma aplicação universal, capaz de funcionar em qualquer cidade. A experiência se torna pessoal e altamente relevante para o contexto do usuário.
 
-#### `V3.1: O CURADOR DE NICHOS (Busca Híbrida Inteligente)`
+#### `V3.1: CURADOR DE NICHOS`
 
 Percebemos que as categorias oficiais do Google eram insuficientes para o nosso nicho. A solução foi fazer nosso app ser mais inteligente que a ferramenta que ele usa. O servidor agora dispara um arsenal de buscas em paralelo: uma **Busca por Proximidade** com tipos oficiais (`bar`, `night_club`) para criar a base, e múltiplas **Buscas por Texto** para caçar os nichos específicos com palavras-chave (`lounge`, `hookah`, `festas`). **Resultado:** Qualidade de dados massivamente superior. O app agora encontra não apenas os lugares óbvios, mas a _vibe_ que o usuário procura, tornando-se um verdadeiro especialista.
+
+#### `V3.2: O PENTE FINO (Curadoria Pós-Busca)`
+
+Com a telemetria do 'Modo Debug', identificamos que a busca híbrida ainda trazia "ruído" (lojas, restaurantes, etc.). Esta versão implementa um funil de filtragem no servidor. Ele aplica um conjunto de regras (baseado em `primaryType` e `types`) **depois** de receber os dados, garantindo que apenas os resultados mais relevantes para o nosso nicho cheguem ao usuário. **Resultado:** A mais alta qualidade de dados até agora. O app se torna um especialista, eliminando "falsos positivos" e entregando uma lista confiável.
 
 ---
 
