@@ -28,7 +28,7 @@
 
 ---
 
-### `V1  Evolução -> V2`
+### `V1  Evolução -> V3.2`
 
 #### `V1: (Client-Side)`
 
