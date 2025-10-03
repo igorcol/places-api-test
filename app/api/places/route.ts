@@ -64,7 +64,13 @@ export async function GET() {
             }
         });
 
-        const uniquePlaces = Array.from(allPlaces.values());
+        const uniquePlaces = Array.from(allPlaces.values()).map(place => {
+            const photoName = place.photos?.[0]?.name;
+            const photoUrl = photoName
+                ? `https://places.googleapis.com/v1/${photoName}/media?key=${API_KEY}&maxWidthPx=400`
+                : null; 
+            return { ...place, photoUrl };
+        });
 
         return NextResponse.json(uniquePlaces);
     }

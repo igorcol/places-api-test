@@ -1,35 +1,52 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import PlaceCard from '@/components/PlaceCard';
-import { searchPlaces } from '@/lib/google-places';
-import SkeletonCard from '@/components/SkeletonCard';
-import { Place } from '@/types/places';
+import { useEffect, useState } from "react";
+import PlaceCard from "@/components/PlaceCard";
+import SkeletonCard from "@/components/SkeletonCard";
+import { Place } from "@/types/places";
 
 export default function HomePage() {
   const [places, setPlaces] = useState<Place[]>([]);
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // Busca os lugares quando a pagina é carregada
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
-        const results = await searchPlaces();
+        const response = await fetch("/api/places");
+        if (!response.ok) {
+          throw new Error("A resposta da rede não foi OK");
+        }
+
+        const results = await response.json();
         setPlaces(results);
       } catch (error) {
         console.error("Erro ao carregar os lugares na página:", error);
+        setError(
+          "Não foi possível carregar os locais. Tente novamente mais tarde."
+        );
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchPlaces();
   }, []);
 
   const renderContent = () => {
     if (isLoading) {
       // Array de 9 posições para renderizar 9 skeletons
-      return Array.from({ length: 9 }).map((_, index) => <SkeletonCard key={index} />);
+      return Array.from({ length: 9 }).map((_, index) => (
+        <SkeletonCard key={index} />
+      ));
+    }
+
+    if (error) {
+      return (
+        <div className="col-span-full text-center text-red-400">
+          <p>{error}</p>
+        </div>
+      );
     }
 
     if (places.length === 0) {
@@ -47,9 +64,9 @@ export default function HomePage() {
     <main className="min-h-screen bg-gray-900 text-white p-4 sm:p-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-10 tracking-wider">
-          Places API Teste
+          Places API - Teste
         </h1>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {renderContent()}
         </div>

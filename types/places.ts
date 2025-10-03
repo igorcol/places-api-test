@@ -11,4 +11,5 @@ export interface Place {
     photos?: {
         name: string;
     }[];
+    photoUrl?: string | null;
 }
