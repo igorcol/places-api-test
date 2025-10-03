@@ -10,9 +10,27 @@ export interface Place {
     rating?: number
     photos?: {
         name: string;
+        photoUrl?: string;
     }[];
     photoUrl?: string | null;
     types?: string[]; // Tipo do local
     primaryType?: string;
+
+    // -- CAMPOS PARA A PAGINA DE DETALHES --
     websiteUri?: string; // Pagina do local
+    nationalPhoneNumber?: string;
+    regularOpeningHours?: {
+        openNow: boolean;
+        weekdayDescriptions: string[];
+    };
+    reviews?: {
+        authorAttribution: {
+            displayName: string;
+        },
+        relativePublishTimeDescription: string;
+        rating: number;
+        text: {
+            text: string;
+        }
+    }[];
 }
