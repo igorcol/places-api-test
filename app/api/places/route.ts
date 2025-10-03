@@ -68,7 +68,7 @@ export async function GET() {
         const [nightclubs, bars, events] = await Promise.all([ // ? Aqui trocaremos pelos filtros vindos do front ??
             searchText('baladas em Sorocaba'),
             searchText('bares em Sorocaba'),
-            searchText('shows efestas em Sorocaba hoje')
+            searchText('shows e festas em Sorocaba hoje')
         ]);
 
         // Map para juntar os resultados e remover duplicatas
