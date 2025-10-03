@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 const PLACES_API_URL = 'https://places.googleapis.com/v1/places:searchText';
@@ -10,7 +11,7 @@ const PLACES_API_URL = 'https://places.googleapis.com/v1/places:searchText';
 /**
  * Busca lugares de um tipo específico em sorocaba
  */
-export async function searchPlaces() {
+async function searchPlaces() {
     if (!API_KEY) {
         throw new Error("A chave da API do google places não foi configurada.");
     }
