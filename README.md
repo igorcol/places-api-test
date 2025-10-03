@@ -28,19 +28,21 @@
 
 ---
 
-### `V1 -> V3.2`
+### `V1  Evolução -> V2`
 
-#### `V1: A IDEIA`
+#### `V1: (Client-Side)`
 
-O cliente (navegador) trabalhava sozinho. Disparava uma única `textQuery` genérica e estática. Era funcional para provar o conceito, mas amador. **Resultado:** Lento, inseguro e sem inteligência.
+O cliente (navegador) trabalhava sozinho. A partir do `useEffect`, disparava uma única `textQuery` genérica (`'bares e baladas em Sorocaba'`) direto para a API do Google. Era funcional, mas amador. **Resultado:** Lento para o usuário, lógica de busca exposta e sem inteligência de curadoria.
 
-#### `V2: A MÁQUINA`
+#### `V2: (Server-Side)`
 
-A arquitetura é profissionalizada. O cliente faz uma única chamada para nossa própria API, que orquestra múltiplas buscas em paralelo e salva os resultados em um cache de memória. **Resultado:** Performance, segurança e controle. A fundação robusta foi construída.
+O cliente agora delega. Ele faz **UMA** chamada para nossa própria API (`/api/places`). Nosso servidor, organiza **MÚLTIPLAS** chamadas em paralelo ao Google, buscando por tipos específicos (`'baladas'`, `'bares'`, `'shows'`). Os resultados são agregados, duplicatas removidas, e a lista final é mantida em um **cache** de memória para velocidade absurda. **Resultado:** Resposta quase instantânea, segurança máxima com a chave de API 100% secreta e controle total sobre os dados entregues.
 
-#### `V3: Busca Dinâmica e Curadoria`
+    O primeiro usuário realiza a chamada para a API, que salva os dados retornados em cache durante X tempo. Outros usuários que acessarem neste intervalo de tempo, não realizarão novas chamadas na API.
 
-Com a máquina pronta, começamos o processo de ensiná-la a "pensar".
+#### `V3: A CONSCIÊNCIA GEOGRÁFICA`
+
+O app deixa de ser sobre Sorocaba e passa a ser sobre **o usuário**. O cliente agora tem a missão de obter as coordenadas do usuário via `navigator.geolocation` e enviá-las para a nossa API. O servidor usa essa localização para realizar buscas geográficas precisas (`searchNearby`), e o **cache** evolui: deixa de ser um "post-it" único e se torna um "arquivo" com pastas para cada região do mapa. **Resultado:** Uma aplicação universal, capaz de funcionar em qualquer cidade. A experiência se torna pessoal e altamente relevante para o contexto do usuário.
 
 - **`V3.0: Geolocalização`**
   O app aprendeu **ONDE** olhar. Deixou de ser fixo em Sorocaba para usar as coordenadas do usuário, com um cache segmentado por região. **Resultado:** Uma aplicação universal e pessoal.
@@ -52,7 +54,6 @@ Com a máquina pronta, começamos o processo de ensiná-la a "pensar".
   O app aprendeu **O QUE IGNORAR**. Com a telemetria do Modo Debug, implementamos um funil de filtragem no servidor que aplica regras de negócio (baseadas em `primaryType` e `types`) para eliminar "falsos positivos". **Resultado:** A mais alta qualidade de dados. O app se torna um especialista confiável.
 
 ---
-
 
 ```
 **ERROS PARA VERIFICAR DEPOIS**
