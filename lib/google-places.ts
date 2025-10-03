@@ -6,6 +6,7 @@ const PLACES_API_URL = 'https://places.googleapis.com/v1/places:searchText';
 // !!!! >> NÃO USAR << !!!! \\
 // !!!! >> NÃO USAR << !!!! \\
 // ! FUNÇÃO ANTIGA PARA A V1 
+// Para a V2 utilizamos a rota app/api/places/route.ts
 /**
  * Busca lugares de um tipo específico em sorocaba
  */
