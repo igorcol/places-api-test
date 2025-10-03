@@ -45,3 +45,11 @@ O cliente agora delega. Ele faz **UMA** chamada para nossa própria API (`/api/p
 O app deixa de ser sobre Sorocaba e passa a ser sobre **o usuário**. O cliente agora tem a missão de obter as coordenadas do usuário via `navigator.geolocation` e enviá-las para a nossa API. O servidor usa essa localização para realizar buscas geográficas precisas (`searchNearby`), e o **cache** evolui: deixa de ser um "post-it" único e se torna um "arquivo" com pastas para cada região do mapa. **Resultado:** Uma aplicação universal, capaz de funcionar em qualquer cidade. A experiência se torna pessoal e altamente relevante para o contexto do usuário.
 
 ---
+
+```
+**ERROS PARA VERIFICAR DEPOIS**
+
+- Se der algum erro na busca e não achar nada
+    O cache é salvo vazio e só é recarregado novamente depois que o cache expira
+    
+```
