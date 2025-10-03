@@ -9,6 +9,12 @@ const sorocabaLocation = {
     longitude: -47.4580,
 };
 
+// --- LÓGICA DE CACHE ---
+let cachedData: Place[] | null = null;
+let cacheTimestamp: number | null = null;
+// Tempo de vida do cache em ms
+const CACHE_DURATION_MS = 30 * 60 * 1000;
+
 // Função auxiliar para fazer uma busca especifica
 // TODO: No futuro -> usar "Nearby Search" com tipos
 async function searchText(textQuery: string): Promise<Place[]> {
@@ -46,8 +52,17 @@ async function searchText(textQuery: string): Promise<Place[]> {
     return data.places || [];
 }
 
-// * GET PRINCIPAL DA API
+// * ---- GET PRINCIPAL DA API ----
 export async function GET() {
+    // --- VERIFICAÇÃO DO CACHE ---
+    // Checa se temos dados e se o tempo não expirou
+    if (cachedData && cacheTimestamp && (Date.now() - cacheTimestamp < CACHE_DURATION_MS)) {
+        console.log("CACHE HIT! Entregando dados salvos.")
+        return NextResponse.json(cachedData);
+    }
+    // Se o cache está velho ou não existe, continua
+    console.log('CACHE MISS! Buscando novos dados do Google')
+
     try {
         // Dispara as buscas em paralelo para maximizar performance
         const [nightclubs, bars, events] = await Promise.all([ // ? Aqui trocaremos pelos filtros vindos do front ??
@@ -71,6 +86,10 @@ export async function GET() {
                 : null; 
             return { ...place, photoUrl };
         });
+
+        // --- ATUALIZAÇÃO DO CACHE ---
+        cachedData = uniquePlaces;
+        cacheTimestamp = Date.now();
 
         return NextResponse.json(uniquePlaces);
     }
